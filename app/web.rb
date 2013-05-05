@@ -1,0 +1,55 @@
+require 'sinatra'
+require 'mongo'
+require 'appratings'
+require 'json'
+require 'rack'
+
+require_relative 'helpers/data_helper.rb'
+require_relative 'helpers/app_helper.rb'
+require_relative 'helpers/rating_helper.rb'
+
+class AppRatingsWeb < Sinatra::Base
+  configure do
+    set :public_folder, File.dirname(__FILE__) + '/../public'
+  end
+
+  configure :development, :test do
+    enable :show_exceptions
+  end
+
+  configure :production do
+    enable :logging
+    disable :dump_errors
+    disable :show_exceptions
+  end
+
+  get '/' do
+    send_file File.join(settings.public_folder, 'index.html')
+  end
+
+  get '/list' do
+    content_type :json
+    
+    apps = Array.new
+    
+    AppHelper.list_apps do |app|
+      apps << app
+    end
+    
+    {:status => 'ok', :results => apps}.to_json
+  end
+
+  get '/ratings/:id' do
+    content_type :json
+
+    app_id = params[:id]
+
+    app = AppHelper.find_app(app_id)
+    app_info = app['info']
+
+    records = RatingHelper.read_ratings(app_id)
+
+    info = {:app_name => app_info['trackName'], :app_version => app_info['version']}
+    {:status => 'ok', :results => {:info => info, :records => records}}.to_json
+  end
+end
