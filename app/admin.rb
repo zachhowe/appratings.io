@@ -19,7 +19,7 @@ class AppRatingsAdmin < Sinatra::Base
   
   configure :test, :production do
     enable :logging
-    disable :dump_errors
+    enable :dump_errors
 
     use Rack::Auth::Basic, "Restricted Area" do |username, password|
       username == 'admin' and password == 'admin'

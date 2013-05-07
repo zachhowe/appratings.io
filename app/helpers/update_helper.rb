@@ -1,13 +1,17 @@
 module UpdateHelper
   def self.update
-    AppHelper.list_apps do |app|
-      app_id = app[:app_id]
+    DataHelper.open('apps') do |collection|
+      docs = collection.find({}, {:fields => ['app_id']})
 
-      puts "Updating info for #{app_id}"
-      info = update_app(app_id)
+      docs.each do |doc|
+        app_id = doc[:app_id]
 
-      puts "Updating ratings for #{app_id}"
-      ratings = update_ratings(app_id, info)
+        puts "Updating info for #{app_id}"
+        info = update_app(app_id)
+
+        puts "Updating ratings for #{app_id}"
+        ratings = update_ratings(app_id, info)
+      end
     end
   end
 
