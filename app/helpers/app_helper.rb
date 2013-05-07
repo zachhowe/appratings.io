@@ -1,7 +1,7 @@
 module AppHelper
   def self.add_app(app_id)
     DataHelper.open('apps') do |collection|
-      collection.insert({"app_id" => app_id, "info" => info})
+      collection.insert({"app_id" => app_id})
     end
   end
   
