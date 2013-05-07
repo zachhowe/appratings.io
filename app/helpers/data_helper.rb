@@ -1,7 +1,7 @@
 module DataHelper
   def self.open(collection_name, &block)
     client = Mongo::MongoClient.from_uri
-    db = client['super']
+    db = client['app15505665']
     collection = db[collection_name]
   
   	case block.arity
