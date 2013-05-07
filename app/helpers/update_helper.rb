@@ -4,7 +4,7 @@ module UpdateHelper
       docs = collection.find({}, {:fields => ['app_id']})
 
       docs.each do |doc|
-        app_id = doc[:app_id]
+        app_id = doc['app_id']
 
         puts "Updating info for #{app_id}"
         info = update_app(app_id)
