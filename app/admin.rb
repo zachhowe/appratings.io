@@ -10,7 +10,7 @@ require_relative 'helpers/rating_helper.rb'
 
 class AppRatingsAdmin < Sinatra::Base
   configure do
-    set :public_folder, ENV['PUBLIC_DIR'] + '/public'
+    set :public_folder, File.dirname(__FILE__) + '/../public'
   end
 
   configure :development, :test do
