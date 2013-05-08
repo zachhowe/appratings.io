@@ -29,14 +29,13 @@
             $.get('/admin/add/' + app_id, function(data) {
                 var status = data.status;
                 if (status !== 'ok') {
-                	alert('An error occured. Please try again.');
+                    alert('Error: ' + status);
                 } else {
-                	alert('Succesfully added app to apps list. It could take up to an hour for data to appear.');
+                	alert('Succesfully added App ID to list. It could take up to an hour for data to appear.');
 		            $('#app_id').val('');
                 }
             });
         }
-
     </script>
 </head>
 <body>

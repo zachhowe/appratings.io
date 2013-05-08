@@ -5,7 +5,7 @@ module RatingHelper
     
     DataHelper.open('ratings') do |collection|
       if version.nil? || version.length == 0
-        docs = collection.find({'app_id' => app_id}, {:limit => 10, :sort => [:date, :desc]})
+        docs = collection.find({'app_id' => app_id}, {:limit => 10, :sort => [:date, :asc]})
       else
         docs = collection.find({'app_id' => app_id, 'version' => version}, {:limit => 10, :sort => [:date, :asc]})
       end
