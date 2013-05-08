@@ -6,16 +6,22 @@ module UpdateHelper
       docs.each do |doc|
         app_id = doc['app_id']
 
-        puts "Updating info for #{app_id}"
-        info = update_app(app_id)
+        if !app_id.nil?
+          puts "Updating info for #{app_id}"
+          info = update_app(app_id)
 
-        kind = info['kind']
+          kind = nil
+          
+          if !info.nil?
+            kind = info['kind']
+          end
 
-        if !kind.nil? && kind.eql?('software')
-          puts "Updating ratings for #{app_id}"
-          ratings = update_ratings(app_id, info)
-        else
-          echo "Skipping ID #{app_id}: Not an App or invalid iTunes Store ID"
+          if !kind.nil? && kind.eql?('software')
+            puts "Updating ratings for #{app_id}"
+            ratings = update_ratings(app_id, info)
+          else
+            puts "Skipping ID #{app_id}: Not an App or invalid iTunes Store ID"
+          end
         end
       end
     end
