@@ -33,8 +33,16 @@ class AppRatingsAdmin < Sinatra::Base
   get '/add/:id' do
     content_type :json
 
-    AppHelper.add_app(params[:id])
+    begin
+      app_id = params[:id].strip!
+
+      Float(app_id)
+
+      AppHelper.add_app(app_id)
     
-    {:status => 'ok'}.to_json
+      {:status => 'ok'}.to_json
+    rescue ArgumentError, TypeError
+      {:status => 'invalid app id'}.to_json
+    end
   end
 end
