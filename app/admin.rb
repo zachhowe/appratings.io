@@ -37,16 +37,4 @@ class AppRatingsAdmin < Sinatra::Base
     
     {:status => 'ok'}.to_json
   end
-  
-  get '/list' do
-    content_type :json
-    
-    apps = Array.new
-    
-    AppHelper.list_apps do |app|
-      apps << app
-    end
-    
-    apps.to_json
-  end
 end

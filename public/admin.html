@@ -6,11 +6,54 @@
     <script type="text/javascript" src="/js/jquery-2.0.0.min.js"></script>
 
     <title>App Ratings - Admin</title>
+
+    <script type="text/javascript">
+        window.onload = function() {
+            $.get('/list', function(resp) {
+                var status = resp.status;
+                if (status !== 'ok') {
+                    alert('Error: ' + status);
+                } else {
+                    var results = resp.results;
+                    for (var i in results) {
+                        var app = results[i];
+                        $("#apps_list").append('<tr class="app"><td>' + app.app_id + '</td><td>' + app.app_name + '</td></tr>');
+                    }
+                }
+            });
+        }
+
+        function addApp() {
+            var app_id = $('#app_id').val();
+            
+            $.get('/admin/add/' + app_id, function(data) {
+                var status = data.status;
+                if (status !== 'ok') {
+                	alert('An error occured. Please try again.');
+                } else {
+                	alert('Succesfully added app to apps list. It could take up to an hour for data to appear.');
+		            $('#app_id').val('');
+                }
+            }
+        }
+
+    </script>
 </head>
 <body>
     <div id="wrapper">
         <div style="text-align: center;">
             <h1 id="site_name">App Ratings Admin</h1>
+
+            <table id="apps_list">
+            	<tr>
+            		<th>App ID</th>
+            		<th>App Name</th>
+            	</tr>
+            </table><br/>
+
+	        <div style="text-align: center;">
+	            App ID: <input id="app_id"/> <button onclick="addApp();">Add App</button>
+	        </div>
         </div>
     </div>
 </body>
