@@ -9,8 +9,14 @@ module UpdateHelper
         puts "Updating info for #{app_id}"
         info = update_app(app_id)
 
-        puts "Updating ratings for #{app_id}"
-        ratings = update_ratings(app_id, info)
+        kind = info['kind']
+
+        if !kind.nil? && kind.eql?('software')
+          puts "Updating ratings for #{app_id}"
+          ratings = update_ratings(app_id, info)
+        else
+          echo "Skipping ID #{app_id}: Not an App or invalid iTunes Store ID"
+        end
       end
     end
   end
