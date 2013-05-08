@@ -10,7 +10,7 @@ require_relative 'helpers/rating_helper.rb'
 
 class AppRatingsAdmin < Sinatra::Base
   configure do
-    set :public_folder, File.dirname(__FILE__) + '/../public'
+    set :public_folder, ENV['PUBLIC_DIR'] + '/public'
   end
 
   configure :development, :test do
@@ -33,16 +33,10 @@ class AppRatingsAdmin < Sinatra::Base
   get '/add/:id' do
     content_type :json
 
-    begin
-      app_id = params[:id].strip!
+    app_id = params[:id].strip!
 
-      Float(app_id)
-
-      AppHelper.add_app(app_id)
-    
-      {:status => 'ok'}.to_json
-    rescue ArgumentError, TypeError
-      {:status => 'invalid app id'}.to_json
-    end
+    AppHelper.add_app(app_id)
+  
+    {:status => 'ok'}.to_json
   end
 end
