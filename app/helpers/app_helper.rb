@@ -17,9 +17,12 @@ module AppHelper
 
         if !info.nil?
           app_name = info['trackName']
-          app = {:app_id => app_id, :app_name => app_name}
 
-          yield app
+          if !app_name.nil?
+            app = {:app_id => app_id, :app_name => app_name}
+
+            yield app
+          end
         end
       end
     end
