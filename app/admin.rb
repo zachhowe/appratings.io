@@ -22,7 +22,7 @@ class AppRatingsAdmin < Sinatra::Base
     enable :dump_errors
 
     use Rack::Auth::Basic, "Restricted Area" do |username, password|
-      username == 'admin' and password == 'admin'
+      username == 'admin' and password == 'Fand4ngo!Rocks'
     end
   end
 
