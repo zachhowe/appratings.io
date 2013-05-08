@@ -12,9 +12,15 @@ module AppHelper
       docs.each do |doc|
         app_id = doc['app_id']
         info = doc['info']
-        app_name = info['trackName']
 
-        app = {:app_id => app_id, :app_name => app_name}
+        app = nil
+
+        if !info.nil?
+          app_name = info['trackName']
+          app = {:app_id => app_id, :app_name => app_name}
+        else
+          app = {:app_id => app_id}
+        end
 
         yield app
       end
@@ -25,7 +31,7 @@ module AppHelper
     doc = nil
 
     DataHelper.open('apps') do |collection|
-      doc = collection.find_one({"app_id" => app_id})
+      doc = collection.find_one({'app_id' => app_id})
     end
     
     doc
