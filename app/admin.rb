@@ -33,7 +33,7 @@ class AppRatingsAdmin < Sinatra::Base
   get '/add/:id' do
     content_type :json
 
-    app_id = params[:id].strip!
+    app_id = params[:id]
 
     AppHelper.add_app(app_id)
   
