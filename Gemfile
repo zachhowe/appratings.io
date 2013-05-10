@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
+gem 'thin', '~> 1.5.1'
 gem 'sinatra', '~> 1.4.2'
 gem 'json', '~> 1.7.7'
 gem 'nokogiri', '~> 1.5.6'
