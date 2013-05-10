@@ -2,7 +2,6 @@ require 'bcrypt'
 
 module UserHelper
   def self.authenticate_user(username, plain_text_password)
-
     DataHelper.open('users') do |collection|
       doc = collection.find_one({'username' => username}, {:fields => ['password']})
     end
