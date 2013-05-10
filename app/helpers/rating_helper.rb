@@ -1,7 +1,6 @@
 module RatingHelper
-  def self.read_ratings(app_id)
+  def self.read_ratings(app_id, version = nil)
     records = Array.new
-    version = nil
     
     DataHelper.open('ratings') do |collection|
       if version.nil? || version.length == 0

@@ -43,12 +43,12 @@ class AppRatingsWeb < Sinatra::Base
     content_type :json
 
     app_id = params[:id]
+    version = params[:v]
 
     app = AppHelper.find_app(app_id)
-    app_info = app['info']
-
     records = RatingHelper.read_ratings(app_id)
 
+    app_info = app['info']
     info = {:app_name => app_info['trackName'], :app_version => app_info['version']}
     {:status => 'ok', :results => {:info => info, :records => records}}.to_json
   end
