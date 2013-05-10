@@ -41,4 +41,4 @@ DEPENDENCIES
   mongo (~> 1.8.2)
   nokogiri (~> 1.5.6)
   sinatra (~> 1.4.2)
-  thin
+  thin (~> 1.5.1)
