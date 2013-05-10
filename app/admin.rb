@@ -12,6 +12,10 @@ require_relative 'helpers/user_helper.rb'
 class AppRatingsAdmin < Sinatra::Base
   configure do
     set :public_folder, File.dirname(__FILE__) + '/../public'
+
+    use Rack::Auth::Basic, "Restricted Area" do |username, password|
+      UserHelper.authenticate_user(username, password)
+    end
   end
 
   configure :development, :test do
@@ -21,20 +25,16 @@ class AppRatingsAdmin < Sinatra::Base
   configure :test, :production do
     enable :logging
     enable :dump_errors
-
-    use Rack::Auth::Basic, "Restricted Area" do |username, password|
-      # Master password check
-      result = username == 'admin' and password == 'Fand4ngo!Rocks'
-
-      # if !result
-      #   # User password check
-      #   result = UserHelper.authenticate_user(username, password)
-      # end
-    end
   end
 
   get '/' do
     send_file File.join(settings.public_folder, 'admin.html')
+  end
+
+  get '/env' do
+    content_type :json
+
+    ENV.inspect
   end
   
   get '/add/:id' do
