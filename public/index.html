@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="robots" content="noindex">
+    
+    <title>App Ratings</title>
+
     <link rel="stylesheet" href="/css/base.css" type="text/css" media="screen" />
 
-    <script type="text/javascript" src="/js/jquery-2.0.0.min.js"></script>
     <script type="text/javascript" src="/js/chart.min.js"></script>
-
-    <title>App Ratings</title>
+    <script type="text/javascript" src="/js/jquery-2.0.0.min.js"></script>
 
     <script type="text/javascript">
         window.onload = function() {
@@ -79,21 +81,21 @@
 </head>
 <body>
     <div id="wrapper">
-        <div style="text-align: center;">
+        <div id="header">
             <h1 id="site_name">App Ratings</h1>
-        </div>
-        
-        <div style="text-align: center;">
             <h2 id="app_name"></h1>
             <h3 id="app_version"></h2>
-        </div>
-
-        <div style="text-align: center;">
             Select an App: <select id="app_id"></select><br/><br/><button onclick="loadApp();">Load App</button>
         </div>
 
         <div id="chart-wrapper">
             <canvas width="700" height="300" id="linechart"></canvas>
+        </div>
+
+        <div id="footer">
+            <p>Site Developed by: <a href="http://zach.la">Zach Howe</a></p>
+            <p>Made with <a href="http://www.sinatrarb.com">Sinatra</a>, <a href="http://www.mongodb.org">MongoDB</a>, <a href="http://www.chartjs.org">Chart.js</a>, <a href="https://github.com/zachhowe/appratings">App Ratings Ruby Gem</a></p>
+            <p><a href="/admin">Admin Panel</a></p>
         </div>
     </div>
 </body>

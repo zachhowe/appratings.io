@@ -7,6 +7,7 @@ require 'rack'
 require_relative 'helpers/data_helper.rb'
 require_relative 'helpers/app_helper.rb'
 require_relative 'helpers/rating_helper.rb'
+require_relative 'helpers/user_helper.rb'
 
 class AppRatingsAdmin < Sinatra::Base
   configure do
@@ -22,7 +23,13 @@ class AppRatingsAdmin < Sinatra::Base
     enable :dump_errors
 
     use Rack::Auth::Basic, "Restricted Area" do |username, password|
-      username == 'admin' and password == 'Fand4ngo!Rocks'
+      # Master password check
+      result = username == 'admin' and password == 'Fand4ngo!Rocks'
+
+      # if !result
+      #   # User password check
+      #   result = UserHelper.authenticate_user(username, password)
+      # end
     end
   end
 
