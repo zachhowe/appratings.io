@@ -51,9 +51,9 @@ module UpdateHelper
         date = Time.now.strftime('%Y-%m-%d')
 
         # collection.remove( {:app_id => app_id, :date => date} )
-        collection.remove( {:app_id => app_id,  :version => info['version'], :date => date )
+        collection.remove( {:app_id => app_id, :version => info['version'], :date => date } )
 
-        collection.insert(  {:app_id => app_id, :version => info['version'], :date => date, :ratings => ratings} )
+        collection.insert( {:app_id => app_id, :version => info['version'], :date => date, :ratings => ratings} )
       end
     end
 
