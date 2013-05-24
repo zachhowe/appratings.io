@@ -48,28 +48,38 @@
                 $('#app_version').text('Version: ' + info.app_version);
 
                 var records = results.records;
-                var plot_data = Array();
+                var plot_data_total = Array();
+                var plot_data_verion = Array();
                 var labels = Array();
 
                 if (records.length > 1) {
                     for (var i in records) {
                         var r = records[i];
-
-                        plot_data.push(r.average);
+                        
+                        plot_data_total.push(r.ratings_total_avg);
+                        plot_data_verion.push(r.ratings_version_avg);
                         labels.push(r.chart_label);
                     }
 
                     var data = {
                         labels : labels,
                         datasets : [
-                        {
-                            fillColor : "rgba(220,220,220,0.5)",
-                            strokeColor : "rgba(220,220,220,1)",
-                            pointColor : "rgba(220,220,220,1)",
-                            pointStrokeColor : "#fff",
-                            data : plot_data
-                        }
-                    ]};
+                            {
+                                fillColor : "rgba(220,220,220,0.5)",
+                                strokeColor : "rgba(220,220,220,1)",
+                                pointColor : "rgba(220,220,220,1)",
+                                pointStrokeColor : "#fff",
+                                data : plot_data_total
+                            },
+                            {
+                                fillColor : "rgba(151,187,205,0.5)",
+                                strokeColor : "rgba(151,187,205,1)",
+                                pointColor : "rgba(151,187,205,1)",
+                                pointStrokeColor : "#fff",
+                                data : plot_data_verion
+                            }
+                        ]
+                    };
 
                     renderLineChart(data);
                 } else {

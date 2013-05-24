@@ -15,14 +15,33 @@ module RatingHelper
         date = doc['date']
         ratings = doc['ratings']
 
-        cur = AppRatings::RatingUtil.weighted_mean(ratings['version'])
-        cur_r = (cur * 5)
+        ratings_total_avg = weighted_mean(ratings['total'])
+        ratings_version_avg = weighted_mean(ratings['version'])
 
-        # info = {:app_name => app_name, :app_version => app_version}
-        records << {:chart_label => "#{date} (#{app_version})", :date => date, :average => cur_r, :version => app_version}
+        records << {
+          :chart_label => "#{date} (#{app_version})",
+          :date => date,
+          :average => ratings_version_avg,
+          :ratings_total_avg => ratings_total_avg,
+          :ratings_version_avg => ratings_version_avg,
+          :version => app_version
+        }
       end
     end
 
     records
+  end
+
+  private
+
+  def self.weighted_mean(ratings)
+    a = Array.new
+    ratings.each_pair do |name, val|
+      a << [name.to_i, val.to_i]
+    end
+
+    mean = a.reduce(0) { |m,r| m += r[0] * r[1] } / a.reduce(0) { |m,r| m += r[1] }.to_f
+
+    mean
   end
 end
