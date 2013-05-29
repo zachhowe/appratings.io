@@ -6,6 +6,10 @@ if ENV['RACK_ENV'] == 'development'
   ENV['MONGODB_URI'] = 'mongodb://localhost/appratings'
 end
 
+if ENV['RACK_ENV'] == 'test'
+  ENV['MONGODB_URI'] = 'mongodb://localhost/app15505665'
+end
+
 map '/' do
   run AppRatingsWeb
 end
