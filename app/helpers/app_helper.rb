@@ -1,10 +1,16 @@
 module AppHelper
   def self.add_app(app_id)
     DataHelper.open('apps') do |collection|
-      collection.insert({"app_id" => app_id})
+      collection.insert({'app_id' => app_id})
     end
   end
   
+  def self.remove_app(app_id)
+    DataHelper.open('apps') do |collection|
+      collection.delete({'app_id' => app_id})
+    end
+  end
+
   def self.list_apps(&block)
     DataHelper.open('apps') do |collection|
       docs = collection.find({}, {:fields => ['app_id', 'info']})
