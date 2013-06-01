@@ -1,9 +1,9 @@
 #!/bin/sh
 
-USER='Bx1whnVv0d4Hu3H'
-PASS='192T3X5T9172h8I'
-HOST='alex.mongohq.com'
-PORT=10023
+USER='dump'
+PASS='H3uH4d0vVnhw1xB'
+HOST='bernard.mongohq.com'
+PORT=10011
 NAME='app15505665'
 
 echo 'Dumping production database to local machine...'
