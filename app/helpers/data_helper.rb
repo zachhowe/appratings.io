@@ -1,4 +1,4 @@
-module DataHelper
+class DataHelper
   def self.database_name_from_uri(uri)
     begin
       u = URI(uri)

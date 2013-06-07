@@ -1,6 +1,6 @@
 require 'bcrypt'
 
-module UserHelper
+class UserHelper
   def self.add_user(username, plain_text_password)
     should_add = !user_exists?(username)
 

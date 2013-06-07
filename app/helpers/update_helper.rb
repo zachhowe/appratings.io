@@ -1,4 +1,4 @@
-module UpdateHelper
+class UpdateHelper
   def self.update
     DataHelper.open('apps') do |collection|
       docs = collection.find({}, {:fields => ['app_id']})
@@ -53,7 +53,7 @@ module UpdateHelper
         # collection.remove( {:app_id => app_id, :date => date} )
         collection.remove( {:app_id => app_id, :version => info['version'], :date => date } )
 
-        collection.insert( {:app_id => app_id, :version => info['version'], :date => date, :ratings => ratings} )
+        collection.insert( {:app_id => app_id, :version => info['version'], :date => date, :ratings => ratings, :time => Time.now} )
       end
     end
 

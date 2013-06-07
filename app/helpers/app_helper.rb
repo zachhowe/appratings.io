@@ -1,4 +1,4 @@
-module AppHelper
+class AppHelper
   def self.add_app(app_id)
     DataHelper.open('apps') do |collection|
       collection.insert({'app_id' => app_id})

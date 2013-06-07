@@ -50,6 +50,7 @@ class AppRatingsWeb < Sinatra::Base
 
     app_info = app['info']
     info = {:app_name => app_info['trackName'], :app_version => app_info['version']}
+    
     {:status => 'ok', :results => {:info => info, :records => records}}.to_json
   end
 end
