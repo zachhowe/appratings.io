@@ -1,29 +1,29 @@
 body {
-    font-family: Arial;
-	background-color: #888;
+  font-family: Arial;
+  background-color: #888;
 }
 
 canvas {
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 800px;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 800px;
 }
 
 #wrapper {
-    display: block;
-	background-color: #fff;
-    padding: 20px;
-    margin: 0 150px 0 150px;
+  display: block;
+  background-color: #fff;
+  padding: 20px;
+  margin: 0 150px 0 150px;
 }
 
 #header {
-	text-align: center;
+  text-align: center;
 }
 
 #footer {
-	text-align: center;
-	font-size: 12px;
+  text-align: center;
+  font-size: 12px;
 }
