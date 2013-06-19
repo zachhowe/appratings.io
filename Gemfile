@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+ruby '2.0.0'
+
 gem 'thin', '~> 1.5.1'
 gem 'sinatra', '~> 1.4.2'
 gem 'json', '~> 1.7.7'
