@@ -1,4 +1,6 @@
-window.onload = function() {
+var chart = null;
+
+function getAppList() {
   $.get('/list', function(resp) {
     var status = resp.status;
     if (status !== 'ok') {
@@ -12,9 +14,7 @@ window.onload = function() {
       } 
     }
   });
-};  
-
-var chart = null;
+}
 
 function renderChart(data) {
   var chart_type = $('#chart_type').val();

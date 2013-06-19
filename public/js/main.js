@@ -5,5 +5,9 @@ requirejs.config({
   }
 });
 
-requirejs(['jquery', 'chart', 'sprintf', 'app/main'], function ($, chart, sprintf, main) {
-});
+requirejs(
+  ['jquery', 'chart', 'sprintf', 'app/main'],
+  function ($, chart, sprintf, main) {
+    getAppList();
+  }
+);
