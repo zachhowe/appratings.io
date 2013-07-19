@@ -16,9 +16,15 @@ class UserHelper
   end
 
   def self.remove_user(username)
-    DataHelper.open('users') do |collection|
-      collection.remove({'username' => username})
+    should_remove = user_exists?(username)
+
+    if should_remove
+      DataHelper.open('users') do |collection|
+        collection.remove({'username' => username})
+      end
     end
+    
+    should_remove
   end
 
   def self.user_exists?(username)

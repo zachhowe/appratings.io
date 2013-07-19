@@ -6,7 +6,6 @@ require_relative '../app/helpers/user_helper.rb'
 
 if ARGV.count > 0
 	cmd = ARGV.shift
-
   arg_count = ARGV.count
 
   if cmd.eql?('add') && arg_count == 2
@@ -18,6 +17,16 @@ if ARGV.count > 0
     result = UserHelper.add_user(username, password)
 
     status = result ? 'created' : 'already exists'
+
+    puts "User '#{username}' #{status}."
+  elsif cmd.eql?('delete') && arg_count == 1
+    username = ARGV[0]
+
+    puts "Attempting to remove user #{username}"
+
+    result = UserHelper.remove_user(username)
+
+    status = result ? 'deleted' : 'does not exist'
 
     puts "User '#{username}' #{status}."
   end
