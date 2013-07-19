@@ -1,12 +1,15 @@
 class RatingHelper
-  def self.read_ratings(app_id, req_version = nil)
+  def self.read_average_rating(app_id, version)
+  end
+  
+  def self.read_ratings(app_id, request_version = nil)
     records = Array.new
     
     DataHelper.open('ratings') do |collection|
-      if req_version.nil? || req_version.length == 0
+      if request_version.nil? || request_version.length == 0
         docs = collection.find({'app_id' => app_id}, {:limit => 10, :sort => [:time, :desc]})
       else
-        docs = collection.find({'app_id' => app_id, 'version' => req_version}, {:limit => 10, :sort => [:time, :desc]})
+        docs = collection.find({'app_id' => app_id, 'version' => request_version}, {:limit => 10, :sort => [:time, :desc]})
       end
 
       docs.reverse_each do |doc|
