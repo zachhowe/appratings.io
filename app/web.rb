@@ -26,7 +26,7 @@ class AppRatingsWeb < Sinatra::Base
   get '/' do
     send_file File.join(settings.public_folder, 'index.html')
   end
-
+  
   get '/list' do
     content_type :json
     
@@ -37,6 +37,16 @@ class AppRatingsWeb < Sinatra::Base
     end
     
     {:status => 'ok', :results => apps}.to_json
+  end
+
+  get '/info/:id' do
+    content_type :json
+
+    app_id = params[:id]
+
+    app = AppHelper.find_app(app_id)
+    
+    {:status => 'ok', :results => app['info']}.to_json
   end
 
   get '/ratings/:id' do

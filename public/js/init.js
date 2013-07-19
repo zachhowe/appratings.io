@@ -8,6 +8,8 @@ requirejs.config({
 requirejs(
   ['jquery', 'chart', 'sprintf', 'app/main'],
   function ($, chart, sprintf, main) {
+    $("#app_icon").hide();
+    
     getAppList();
   }
 );

@@ -33,23 +33,39 @@ function renderChart(data) {
   }
 }
 
-function loadApp() {
-  var app_id = $('#app_id').val();
-  
-  loadAppData(app_id);
+function loadApp(app_id) {
+  if (typeof app_id == "undefined") {
+    app_id = $('#app_id').val();
+  }
+
+  loadAppIcon(app_id);
+  loadAppData(app_id, renderChart);
 }
 
-function loadAppData(app_id) {
+function loadAppIcon(app_id) {
+  $.get('/info/' + app_id, function(data) {
+    var status = data.status;
+    var results = data.results;
+    
+    $("#app_icon").show();
+    $("#app_icon").attr("src", results.artworkUrl60);
+  });
+}
+
+function loadAppData(app_id, callback) {
+  if (typeof callback == "undefined") {
+    callback = renderChart;
+  }
+  
   $.get('/ratings/' + app_id, function(read_data) {
     var status = read_data.status;
     var results = read_data.results;
     var info = results.info;
 
     $('#app_name').text(info.app_name);
-    $('#app_version').text('Version: ' + info.app_version);
+    $('#app_version').text('Current Version: ' + info.app_version);
 
     var records = results.records;
-    var plot_data_total = Array();
     var plot_data_verion = Array();
     var labels = Array();
 
@@ -57,7 +73,6 @@ function loadAppData(app_id) {
       for (var i in records) {
         var r = records[i];
         
-        // plot_data_total.push(r.ratings_total_avg);
         plot_data_verion.push(r.ratings_version_avg);
         labels.push(r.chart_label);
       }
@@ -65,13 +80,6 @@ function loadAppData(app_id) {
       var data = {
         labels : labels,
         datasets : [
-          // {
-          //     fillColor : "rgba(220,220,220,0.5)",
-          //     strokeColor : "rgba(220,220,220,1)",
-          //     pointColor : "rgba(220,220,220,1)",
-          //     pointStrokeColor : "#fff",
-          //     data : plot_data_total
-          // },
           {
             fillColor : "rgba(151,187,205,0.5)",
             strokeColor : "rgba(151,187,205,1)",
@@ -81,8 +89,8 @@ function loadAppData(app_id) {
           }
         ]
       };
-
-      renderChart(data);
+      
+      callback(data);
     } else {
       alert('Sorry, there is not enough ratings to show yet. Need at least two days of data to show.');
     }
