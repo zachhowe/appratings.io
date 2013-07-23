@@ -3,11 +3,11 @@ require './app/web'
 require './app/admin'
 
 if ENV['RACK_ENV'] == 'development'
-  ENV['MONGODB_URI'] = 'mongodb://localhost/app15505665'
+  ENV['MONGODB_URI'] = 'mongodb://localhost/appratings'
 end
 
 if ENV['RACK_ENV'] == 'test'
-  ENV['MONGODB_URI'] = 'mongodb://localhost/app15505665'
+  ENV['MONGODB_URI'] = 'mongodb://localhost/appratings'
 end
 
 map '/' do
