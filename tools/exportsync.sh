@@ -12,7 +12,7 @@ HOST='bernard.mongohq.com'
 PORT=10011
 NAME='app15505665'
 
-COLLETIONS=( apps ratings users )
+COLLETIONS=( apps ratings )
 
 echo 'Exporting production database to local machine...'
 echo 
