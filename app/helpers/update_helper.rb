@@ -6,13 +6,13 @@ class UpdateHelper
       docs.each do |doc|
         app_id = doc['app_id']
 
-        if !app_id.nil?
+        unless app_id.nil?
           puts "Updating info for #{app_id}"
           info = update_app(app_id)
 
           kind = nil
-          
-          if !info.nil?
+
+          unless info.nil?
             kind = info['kind']
           end
 
@@ -32,11 +32,11 @@ class UpdateHelper
   def self.update_app(app_id)
     info = AppRatings::RatingFetcher.fetch_info(app_id)
 
-    if !info.nil?
+    unless info.nil?
       DataHelper.open('apps') do |collection|
         collection.update(
-          {:app_id => app_id},
-          {:app_id => app_id, :info => info} )
+            {:app_id => app_id},
+            {:app_id => app_id, :info => info})
       end
     end
 

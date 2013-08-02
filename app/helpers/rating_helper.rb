@@ -1,19 +1,32 @@
 class RatingHelper
-  def self.read_average_rating(app_id, version)
+  def self.read_available_versions(app_id)
+    versions = Set.new
+
+    DataHelper.open('ratings') do |collection|
+      docs = collection.find({'app_id' => app_id}, {:fields => [:version], :sort => [:time, :desc]})
+
+      docs.reverse_each do |doc|
+        app_version = doc['version']
+
+        versions << app_version
+      end
+    end
+
+    versions.to_a
   end
-  
-  def self.read_ratings(app_id, request_version = nil)
+
+  def self.read_ratings(app_id, version = nil)
     records = Array.new
     
     DataHelper.open('ratings') do |collection|
-      if request_version.nil? || request_version.length == 0
+      if version.nil? || version.length == 0
         docs = collection.find({'app_id' => app_id}, {:limit => 10, :sort => [:time, :desc]})
       else
-        docs = collection.find({'app_id' => app_id, 'version' => request_version}, {:limit => 10, :sort => [:time, :desc]})
+        docs = collection.find({'app_id' => app_id, 'version' => version}, {:limit => 10, :sort => [:time, :desc]})
       end
 
       docs.reverse_each do |doc|
-        app_name = doc['app_name']
+        #app_name = doc['app_name']
         app_version = doc['version']
         date = doc['date']
         time = doc['time']
@@ -22,7 +35,7 @@ class RatingHelper
         ratings_total_avg = weighted_mean(ratings['total'])
         ratings_version_avg = weighted_mean(ratings['version'])
 
-        if !time.nil?
+        unless time.nil?
           date = time.strftime('%Y-%m-%d')
         end
 

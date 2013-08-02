@@ -1,6 +1,6 @@
 body {
   font-family: Arial;
-  background-color: #888;
+  background-color: #888888;
 }
 
 canvas {
@@ -14,7 +14,7 @@ canvas {
 
 #wrapper {
   display: block;
-  background-color: #fff;
+  background-color: #ffffff;
   padding: 20px;
   margin: 0 150px 0 150px;
 }
@@ -26,4 +26,8 @@ canvas {
 #footer {
   text-align: center;
   font-size: 12px;
+}
+
+#error {
+  color: #ff0000;
 }

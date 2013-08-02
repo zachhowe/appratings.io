@@ -31,5 +31,5 @@ if ARGV.count > 0
     puts "User '#{username}' #{status}."
   end
 else
-  puts "Nothing to do."
+  puts 'Nothing to do.'
 end

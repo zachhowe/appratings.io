@@ -47,7 +47,7 @@ class UserHelper
     bcrypt_password = doc['password']
     result = false
 
-    if !bcrypt_password.nil?
+    unless bcrypt_password.nil?
       bcrypt_password = BCrypt::Password.new(bcrypt_password)
       result = bcrypt_password == plain_text_password
     end

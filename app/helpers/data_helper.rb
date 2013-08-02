@@ -4,6 +4,7 @@ class DataHelper
       u = URI(uri)
       u.path[1..-1]
     rescue ArgumentError
+      # ignored
     end
   end
 
@@ -19,7 +20,9 @@ class DataHelper
   			yield
   		when 1
   			yield collection
-  	end
+      else
+        # type code here
+    end
   
     client.close
   end

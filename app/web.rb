@@ -1,6 +1,6 @@
 require 'sinatra'
 require 'mongo'
-require 'appratings'
+#require 'appratings'
 require 'json'
 require 'rack'
 
@@ -24,9 +24,10 @@ class AppRatingsWeb < Sinatra::Base
   end
 
   get '/' do
+    cache_control [:public, :must_revalidate, {:max_age => 300}]
+
     send_file File.join(settings.public_folder, 'index.html')
   end
-  
   get '/list' do
     content_type :json
     
@@ -47,6 +48,16 @@ class AppRatingsWeb < Sinatra::Base
     app = AppHelper.find_app(app_id)
     
     {:status => 'ok', :results => app['info']}.to_json
+  end
+
+  get '/versions/:id' do
+    content_type :json
+
+    app_id = params[:id]
+
+    versions = RatingHelper.read_available_versions(app_id)
+
+    {:status => 'ok', :results => versions}.to_json
   end
 
   get '/ratings/:id' do

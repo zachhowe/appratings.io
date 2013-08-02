@@ -21,10 +21,10 @@ class AppHelper
 
         app = nil
 
-        if !info.nil?
+        unless info.nil?
           app_name = info['trackName']
 
-          if !app_name.nil?
+          unless app_name.nil?
             app = {:app_id => app_id, :app_name => app_name}
 
             yield app

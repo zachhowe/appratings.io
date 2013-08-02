@@ -16,6 +16,10 @@ function getAppList() {
   });
 }
 
+function showError(error_msg) {
+  $('#error').text(error_msg);
+}
+
 function renderChart(data) {
   var chart_type = $('#chart_type').val();
 
@@ -46,9 +50,10 @@ function loadAppIcon(app_id) {
   $.get('/info/' + app_id, function(data) {
     var status = data.status;
     var results = data.results;
-    
-    $("#app_icon").show();
-    $("#app_icon").attr("src", results.artworkUrl60);
+
+    var app_icon = $('#app_icon');
+    app_icon.show();
+    app_icon.attr('src', results.artworkUrl60);
   });
 }
 
@@ -89,10 +94,10 @@ function loadAppData(app_id, callback) {
           }
         ]
       };
-      
+
       callback(data);
     } else {
-      alert('Sorry, there is not enough ratings to show yet. Need at least two days of data to show.');
+      showError('Sorry, there is not enough ratings to show yet. Need at least two days of data to show.');
     }
   });
 }
