@@ -10,3 +10,6 @@ gem 'mongo', '~> 1.8.6'
 gem 'bson_ext', '~> 1.8.6'
 gem 'bcrypt-ruby', '~> 3.1.1'
 gem 'appratings', :git => 'git://github.com/zachhowe/appratings.git'
+
+# Required for tools in ./bin
+gem 'trollop'

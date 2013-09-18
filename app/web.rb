@@ -28,6 +28,7 @@ class AppRatingsWeb < Sinatra::Base
 
     send_file File.join(settings.public_folder, 'index.html')
   end
+
   get '/list' do
     content_type :json
     

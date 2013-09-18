@@ -2,11 +2,7 @@
 require './app/web'
 require './app/admin'
 
-if ENV['RACK_ENV'] == 'development'
-  ENV['MONGODB_URI'] = 'mongodb://localhost/appratings'
-end
-
-if ENV['RACK_ENV'] == 'test'
+if ENV['MONGODB_URI'].nil?
   ENV['MONGODB_URI'] = 'mongodb://localhost/appratings'
 end
 

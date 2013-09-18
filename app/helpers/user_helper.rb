@@ -34,7 +34,7 @@ class UserHelper
       result = collection.find({'username' => username})
     end
 
-    result.count > 1
+    result.count > 0
   end
 
   def self.authenticate_user(username, plain_text_password)
