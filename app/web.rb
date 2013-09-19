@@ -1,8 +1,9 @@
 require 'sinatra'
 require 'mongo'
-#require 'appratings'
 require 'json'
 require 'rack'
+
+require_relative '../lib/appratings.rb'
 
 require_relative 'helpers/data_helper.rb'
 require_relative 'helpers/app_helper.rb'

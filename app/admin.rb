@@ -1,8 +1,9 @@
 require 'sinatra'
 require 'mongo'
-#require 'appratings'
 require 'json'
 require 'rack'
+
+require_relative '../lib/appratings.rb'
 
 require_relative 'helpers/data_helper.rb'
 require_relative 'helpers/app_helper.rb'
@@ -13,10 +14,6 @@ class AppRatingsAdmin < Sinatra::Base
   configure do
     set :public_folder, File.dirname(__FILE__) + '/../public'
     set :static_cache_control, [:public, :must_revalidate, {:max_age => 300}]
-
-    use Rack::Auth::Basic, "Restricted Area" do |username, password|
-      UserHelper.authenticate_user(username, password)
-    end
   end
 
   configure :development, :test do
@@ -26,6 +23,10 @@ class AppRatingsAdmin < Sinatra::Base
   configure :test, :production do
     enable :logging
     enable :dump_errors
+    
+    use Rack::Auth::Basic, "Restricted Area" do |username, password|
+      UserHelper.authenticate_user(username, password)
+    end
   end
 
   get '/' do
