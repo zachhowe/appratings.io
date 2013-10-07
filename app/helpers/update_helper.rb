@@ -44,8 +44,18 @@ module AppRatings
       info
     end
 
+    MAX_TRY_COUNT = 3
+
     def self.update_ratings(app_id, info)
-      ratings = AppRatings::RatingFetcher.fetch_ratings(app_id)
+      0..MAX_TRY_COUNT do |try|
+        begin
+          ratings = AppRatings::RatingFetcher.fetch_ratings(app_id)
+        rescue JSON::ParserError => e
+          puts "Try count: #{try} - JSON Parse errer: #{e}"
+        rescue Exception => e
+          puts "Try count: #{try} - General errer: #{e}"
+        end
+      end
 
       if !ratings[:total].empty? && !ratings[:version].empty?
         DataHelper.open('ratings') do |collection|
