@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
-require 'mongo'
-require 'trollop'
+require 'bundler'
+Bundler.require(:default, :tools)
 
 require_relative '../app/helpers/data_helper.rb'
 require_relative '../app/helpers/user_helper.rb'

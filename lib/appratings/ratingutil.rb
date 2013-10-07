@@ -7,10 +7,11 @@ module AppRatings
       end
 
       mean = a.reduce(0) { |m,r| m += r[0] * r[1] } / a.reduce(0) { |m,r| m += r[1] }.to_f
-      mean /= a.count
 
       mean
     end
+
+    private
 
     def self.weighted_mean_legacy(ratings)
       b7 = 0

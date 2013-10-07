@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
-require 'mongo'
+require 'bundler'
+Bundler.require(:default)
 
 require_relative '../lib/appratings.rb'
 
@@ -12,4 +13,4 @@ if ENV['MONGODB_URI'].nil?
   ENV['MONGODB_URI'] = 'mongodb://localhost/appratings'
 end
 
-UpdateHelper.update
+AppRatings::UpdateHelper.update

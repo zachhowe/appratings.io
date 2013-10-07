@@ -1,7 +1,7 @@
-require "net/http"
-require "openssl"
-require "json/ext"
-require "nokogiri"
+require 'net/http'
+require 'openssl'
+require 'json/ext'
+require 'nokogiri'
 
 module AppRatings
   class RatingFetcher
