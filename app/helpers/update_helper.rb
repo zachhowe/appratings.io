@@ -44,10 +44,10 @@ module AppRatings
       info
     end
 
-    MAX_TRY_COUNT = 3
-
     def self.update_ratings(app_id, info)
-      0..MAX_TRY_COUNT do |try|
+      ratings = nil
+
+      (1..3).each do |try|
         begin
           ratings = AppRatings::RatingFetcher.fetch_ratings(app_id)
         rescue JSON::ParserError => e
