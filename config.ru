@@ -11,10 +11,7 @@ require './app/helpers/app_helper.rb'
 require './app/helpers/rating_helper.rb'
 require './app/helpers/user_helper.rb'
 
-
-if ENV['MONGODB_URI'].nil?
-  ENV['MONGODB_URI'] = 'mongodb://localhost/appratings'
-end
+ENV['MONGODB_URI'] = 'mongodb://localhost/appratings' if ENV['MONGODB_URI'].nil?
 
 map '/' do
   run AppRatings::AppRatingsWeb
