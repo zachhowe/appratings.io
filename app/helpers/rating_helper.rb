@@ -4,7 +4,7 @@ module AppRatings
       versions = Set.new
 
       DataHelper.open('ratings') do |collection|
-        docs = collection.find({'app_id' => app_id}, {:fields => [:version], :sort => [:time, :desc]})
+        docs = collection.find({'app_id' => app_id}, {:fields => [:version], :sort => [:version, :desc]})
 
         docs.reverse_each do |doc|
           app_version = doc['version']
@@ -16,14 +16,14 @@ module AppRatings
       versions.to_a
     end
 
-    def self.read_ratings(app_id, version = nil)
+    def self.read_ratings(app_id, limit = 10, version = nil)
       records = Array.new
 
       DataHelper.open('ratings') do |collection|
         if version.nil? || version.length == 0
-          docs = collection.find({'app_id' => app_id}, {:limit => 10, :sort => [:time, :desc]})
+          docs = collection.find({'app_id' => app_id}, {:limit => limit, :sort => [:time, :desc]})
         else
-          docs = collection.find({'app_id' => app_id, 'version' => version}, {:limit => 10, :sort => [:time, :desc]})
+          docs = collection.find({'app_id' => app_id, 'version' => version}, {:limit => limit, :sort => [:time, :desc]})
         end
 
         docs.reverse_each do |doc|
