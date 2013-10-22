@@ -13,7 +13,9 @@ requirejs(
     main.getAppList();
 
     $('#loadAppButton').click(function() {
-      main.loadApp($('#app_id').val());
+      var app_id = $('#app_id').val();
+
+      main.loadApp(app_id);
     });
   }
 );
