@@ -13,7 +13,7 @@ module AppRatings
       enable :logging
       enable :dump_errors
 
-      use Rack::Auth::Basic, "Restricted Area" do |username, password|
+      use Rack::Auth::Basic, 'Restricted Area' do |username, password|
         UserHelper.authenticate_user(username, password)
       end
     end

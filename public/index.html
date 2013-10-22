@@ -3,7 +3,7 @@
 <head>
   <meta name="robots" content="noindex,nofollow">
   <title>App Ratings</title>
-  <link rel="stylesheet" href="/css/base.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/css/main.css" type="text/css" media="screen" />
   <script data-main="/js/init" type="text/javascript" src="/js/require.js"></script>
 </head>
 <body>
@@ -22,7 +22,7 @@
         <option value="bar">Bar</option>
       </select><br/><br/>
 
-      Select an App: <select id="app_id"></select><br/><br/><button onclick="loadApp($('#app_id').val());">Load App</button>
+      Select an App: <select id="app_id"></select><br/><br/><button id="loadAppButton">Load App</button>
     </div>
 
     <div id="chart-wrapper">

@@ -10,6 +10,10 @@ requirejs(
   function ($, chart, sprintf, main) {
     $("#app_icon").hide();
     
-    getAppList();
+    main.getAppList();
+
+    $('#loadAppButton').click(function() {
+      main.loadApp($('#app_id').val());
+    });
   }
 );
