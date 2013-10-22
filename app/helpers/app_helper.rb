@@ -20,8 +20,6 @@ module AppRatings
           app_id = doc['app_id']
           info = doc['info']
 
-          app = nil
-
           unless info.nil?
             app_name = info['trackName']
 
