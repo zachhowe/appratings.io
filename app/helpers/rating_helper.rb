@@ -16,7 +16,7 @@ module AppRatings
       versions.to_a
     end
 
-    def self.read_ratings(app_id, limit = 10, version = nil)
+    def self.read_ratings(app_id, version = nil, limit = 10)
       records = Array.new
 
       DataHelper.open('ratings') do |collection|

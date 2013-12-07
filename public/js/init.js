@@ -9,13 +9,19 @@ requirejs(
   ['jquery', 'chart', 'sprintf', 'app/main'],
   function ($, chart, sprintf, main) {
     $("#app_icon").hide();
-    
+
     main.getAppList();
 
     $('#loadAppButton').click(function() {
       var app_id = $('#app_id').val();
 
       main.loadApp(app_id);
+    });
+
+    $('#loadAllVersionsButton').click(function() {
+      var app_id = $('#app_id').val();
+
+      main.loadAppVersions(app_id);
     });
   }
 );

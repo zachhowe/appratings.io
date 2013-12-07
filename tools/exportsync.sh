@@ -19,11 +19,17 @@ echo
 
 for i in "${COLLETIONS[@]}"
 do
-	mongoexport -u $USER -p $PASS -d $NAME --host $HOST:$PORT --collection $i >  $TMP_DATA/$i.json
+	mongoexport -u $USER -p $PASS -d $NAME --host $HOST:$PORT --collection $i > $TMP_DATA/$i.json
 done
 
+echo 'Dropping local collection...'
+echo
+
+mongo appratings --eval "db.apps.drop(); db.ratings.drop();"
+
+echo
 echo 'Importing local data to local database...'
-echo 
+echo
 
 for i in "${COLLETIONS[@]}"
 do

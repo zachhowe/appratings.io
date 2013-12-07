@@ -66,5 +66,24 @@ module AppRatings
 
       {:status => 'ok', :results => {:info => info, :records => records}}.to_json
     end
+
+    get '/ratings/:id/by-versions/:versions' do
+      content_type :json
+
+      app_id = params[:id]
+      versions = params[:versions].split(',')
+
+      app = AppHelper.find_app(app_id)
+      records = []
+      versions.each do |version|
+        record = RatingHelper.read_ratings(app_id, version, 1)
+        records << record[0]
+      end
+
+      app_info = app['info']
+      info = {:app_name => app_info['trackName'], :app_version => app_info['version']}
+
+      {:status => 'ok', :results => {:info => info, :records => records}}.to_json
+    end
   end
 end
