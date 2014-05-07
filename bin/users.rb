@@ -2,6 +2,8 @@
 require 'bundler'
 Bundler.require(:default, :tools)
 
+include AppRatings
+
 require_relative '../app/helpers/data_helper.rb'
 require_relative '../app/helpers/user_helper.rb'
 
