@@ -1,5 +1,25 @@
 module AppRatings
   class RatingHelper
+    def self.compare_versions(a, b)
+      as = a.split('.')
+      bs = b.split('.')
+
+      max = as.count > bs.count ? as.count : bs.count
+
+      max.times do |i|
+        a1 = i < as.count ? as[i] : '0'
+        b1 = i < bs.count ? bs[i] : '0'
+
+        if (a1.to_i > b1.to_i)
+          return 1
+        elsif (a1.to_i < b1.to_i)
+          return -1
+        end
+      end
+
+      return 0
+    end
+
     def self.read_available_versions(app_id)
       versions = Set.new
 
@@ -13,7 +33,9 @@ module AppRatings
         end
       end
 
-      versions.to_a
+      versions.to_a.sort! { |a, b|
+        compare_versions(a, b)
+      }
     end
 
     def self.read_ratings(app_id, version = nil, limit = 10)
@@ -26,7 +48,11 @@ module AppRatings
           docs = collection.find({'app_id' => app_id, 'version' => version}, {:limit => limit, :sort => [:time, :desc]})
         end
 
-        docs.reverse_each do |doc|
+        items = docs.to_a.sort! { |a, b|
+          compare_versions(a['version'], b['version'])
+        }
+
+        items.reverse_each do |doc|
           #app_name = doc['app_name']
           app_version = doc['version']
           date = doc['date']
