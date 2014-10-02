@@ -1,3 +1,5 @@
+require 'bcrypt'
+
 module AppRatings
   class UserHelper
     def self.add_user(username, plain_text_password)

@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby '2.1.1'
+ruby '2.1.3'
 
 gem 'json', '~> 1.8.0'
 gem 'nokogiri', '~> 1.5.6'
