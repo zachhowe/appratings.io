@@ -5,6 +5,10 @@ define(function(require, exports) {
     $('#error').text(error_msg);
   };
 
+  clearError = function(error_msg) {
+    showError('');
+  };
+
   renderChart = function(data) {
     var chart_type = $('#chart_type').val();
 
@@ -93,6 +97,8 @@ define(function(require, exports) {
         ]
       };
 
+      clearError();
+      
       return data;
     } else {
       showError('Sorry, there is not enough ratings to show yet. Need at least two days of data to show.');
