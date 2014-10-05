@@ -44,9 +44,10 @@ define(function(require, exports) {
 
     $.get(sprintf('/versions/%s', app_id), function(versions_read_data) {
       var versions = versions_read_data.results;
-      var vs = versions.slice(versions.length - 15).join();
+      var versions_to_show = Math.min(15, versions.length);
+      var version_list = versions.slice(versions.length - versions_to_show).join();
 
-      $.get(sprintf('/ratings/%s/by-versions/%s', app_id, vs), function(read_data) {
+      $.get(sprintf('/ratings/%s/by-versions/%s', app_id, version_list), function(read_data) {
         chartData = generateChartData(read_data);
         if (chartData !== null) callback(chartData);
       });
