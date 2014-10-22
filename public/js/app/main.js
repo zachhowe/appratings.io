@@ -102,7 +102,7 @@ define(function(require, exports) {
       
       return data;
     } else {
-      showError('Sorry, there is not enough ratings to show yet. Need at least two days of data to show.');
+      showError('Sorry, there is not enough data to build a graph yet.');
 
       return null;
     }
