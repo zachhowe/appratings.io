@@ -27,7 +27,7 @@ module AppRatings
         end
 
         items = docs.to_a.sort! { |a, b|
-          compare_versions(a['version'], b['version'])
+          compare_versions(b['version'], a['version'])
         }
 
         items.reverse_each do |doc|
