@@ -14,7 +14,7 @@ define(function(require, exports) {
         $('#app_id').val('');
       }
     });
-  }
+  };
 
   exports.getAppList = function() {
     $.get('/list', function(resp) {
@@ -29,5 +29,5 @@ define(function(require, exports) {
         }
       }
     });
-  }
+  };
 });

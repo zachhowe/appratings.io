@@ -1,11 +1,11 @@
 define(function(require, exports) {
-  var showError, renderChart, loadAppIcon, loadAppData, loadAppDataByVersions, generateChartData;
+  var showError, renderChart, loadAppIcon, loadAppData, loadAppDataByVersions, generateChartData, clearError;
 
   showError = function(error_msg) {
     $('#error').text(error_msg);
   };
 
-  clearError = function(error_msg) {
+  clearError = function() {
     showError('');
   };
 
@@ -48,7 +48,7 @@ define(function(require, exports) {
       var version_list = versions.slice(versions.length - versions_to_show).join();
 
       $.get(sprintf('/ratings/%s/by-versions/%s', app_id, version_list), function(read_data) {
-        chartData = generateChartData(read_data);
+        var chartData = generateChartData(read_data);
         if (chartData !== null) callback(chartData);
       });
     });
@@ -60,7 +60,7 @@ define(function(require, exports) {
     }
 
     $.get(sprintf('/ratings/%s', app_id), function(read_data) {
-      chartData = generateChartData(read_data);
+      var chartData = generateChartData(read_data);
       if (chartData !== null) callback(chartData);
     });
   };
@@ -74,14 +74,14 @@ define(function(require, exports) {
     $('#app_version').text('Current Version: ' + info.app_version);
 
     var records = results.records;
-    var plot_data_verion = [];
+    var plot_data_version = [];
     var labels = [];
 
     if (records.length > 1) {
       for (var i in records) {
         var r = records[i];
 
-        plot_data_verion.push(r.ratings_version_avg);
+        plot_data_version.push(r.ratings_version_avg);
         labels.push(r.chart_label);
       }
 
@@ -93,7 +93,7 @@ define(function(require, exports) {
             strokeColor : "rgba(151,187,205,1)",
             pointColor : "rgba(151,187,205,1)",
             pointStrokeColor : "#fff",
-            data : plot_data_verion
+            data : plot_data_version
           }
         ]
       };
