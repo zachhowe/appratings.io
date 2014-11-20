@@ -4,16 +4,16 @@ module AppRatings
       versions = Set.new
 
       DataHelper.open('ratings') do |collection|
-        docs = collection.find({'app_id' => app_id}, {:fields => [:version], :sort => [:version, :desc]})
+        docs = collection.find({:app_id => app_id}, {:fields => [:version], :sort => [:version, :desc]})
 
         docs.reverse_each do |doc|
           versions << doc['version']
         end
       end
 
-      versions.to_a.sort! { |a, b|
+      versions.to_a.sort! do |a, b|
         compare_versions(a, b)
-      }
+      end
     end
 
     def self.read_ratings(app_id, version = nil, limit = 10)
@@ -21,14 +21,14 @@ module AppRatings
 
       DataHelper.open('ratings') do |collection|
         if version.nil? || version.length == 0
-          docs = collection.find({'app_id' => app_id}, {:limit => limit, :sort => [:time, :desc]})
+          docs = collection.find({:app_id => app_id}, {:limit => limit, :sort => [:time, :desc]})
         else
-          docs = collection.find({'app_id' => app_id, 'version' => version}, {:limit => limit, :sort => [:time, :desc]})
+          docs = collection.find({:app_id => app_id, :version => version}, {:limit => limit, :sort => [:time, :desc]})
         end
 
-        items = docs.to_a.sort! { |a, b|
+        items = docs.to_a.sort! do |a, b|
           compare_versions(b['version'], a['version'])
-        }
+        end
 
         items.reverse_each do |doc|
           #app_name = doc['app_name']
@@ -71,9 +71,9 @@ module AppRatings
         v1i = i < v1s.count ? v1s[i] : '0'
         v2i = i < v2s.count ? v2s[i] : '0'
 
-        if (v1i.to_i > v2i.to_i)
+        if v1i.to_i > v2i.to_i
           return 1
-        elsif (v1i.to_i < v2i.to_i)
+        elsif v1i.to_i < v2i.to_i
           return -1
         end
       end
