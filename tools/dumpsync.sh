@@ -6,6 +6,11 @@ HOST='bernard.mongohq.com'
 PORT=10011
 NAME='app15505665'
 
+echo
+echo 'Dropping existing database...'
+echo
+mongo ./pre-dumpsync.js 
+
 echo 'Dumping production database to local machine...'
 echo
 mongodump -u $USER -p $PASS -d $NAME --host $HOST:$PORT
@@ -18,6 +23,11 @@ echo
 echo 'Removing local dump...'
 echo
 rm -rf $PWD/dump
+
+echo
+echo 'Copying to correct database name...'
+echo
+mongo ./post-dumpsync.js 
 
 echo
 echo 'All done.'
