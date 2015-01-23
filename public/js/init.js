@@ -13,7 +13,7 @@ requirejs.config({
 
 requirejs(
   ['jquery', 'sprintf', 'highcharts', 'app/main'],
-  function ($, chart, sprintf, highcharts, main) {
+  function ($, sprintf, highcharts, main) {
     $("#app_icon").hide();
 
     main.getAppList();
