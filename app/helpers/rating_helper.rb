@@ -16,6 +16,38 @@ module AppRatings
       end
     end
 
+    def self.read_ratings_raw(app_id, limit = 730)
+      records = Array.new
+      firstDate = nil
+
+      DataHelper.open('ratings') do |collection|
+          docs = collection.find({:app_id => app_id}, {:limit => limit, :sort => [:time, :desc]})
+
+        items = docs.to_a.sort! do |a, b|
+          compare_versions(b['version'], a['version'])
+        end
+
+        items.reverse_each do |doc|
+          ratings = doc['ratings']
+          date = doc['date']
+          time = doc['time']
+
+          unless time.nil?
+            date = time.strftime('%Y-%m-%d')
+          end
+
+          if firstDate.nil?
+            firstDate = date
+          end
+
+          ratings_total_avg = RatingUtil.weighted_mean(ratings['total'])
+          records << ratings_total_avg
+        end
+      end
+
+      return {:first => firstDate, :records => records}
+    end
+
     def self.read_ratings(app_id, version = nil, limit = 10)
       records = Array.new
 

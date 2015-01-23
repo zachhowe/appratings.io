@@ -4,6 +4,7 @@ Bundler.require(:default, :web)
 
 require './lib/appratings'
 require './app/web'
+require './app/api'
 require './app/admin'
 
 require './app/helpers/data_helper.rb'
@@ -15,6 +16,10 @@ ENV['MONGODB_URI'] = 'mongodb://localhost/appratings' if ENV['MONGODB_URI'].nil?
 
 map '/' do
   run AppRatings::AppRatingsWeb
+end
+
+map '/api' do
+  run AppRatings::AppRatingsAPI
 end
 
 map '/admin' do
