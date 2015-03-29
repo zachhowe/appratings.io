@@ -1,16 +1,16 @@
 source "https://rubygems.org"
 
-ruby '2.1.5'
+ruby '2.2.1'
 
-gem 'json', '~> 1.8.0'
-gem 'nokogiri', '~> 1.5.6'
-gem 'mongo', '~> 1.8.6'
-gem 'bson_ext', '~> 1.8.6'
-gem 'bcrypt-ruby', '~> 3.1.1'
+gem 'json', '~> 1.8'
+gem 'nokogiri', '~> 1.6'
+gem 'mongo', '~> 1.8'
+gem 'bson_ext', '~> 1.8'
+gem 'bcrypt', '~> 3.1'
 
 group :web do
-  gem 'thin', '~> 1.5.1'
-  gem 'sinatra', '~> 1.4.2'
+  gem 'thin', '~> 1.5'
+  gem 'sinatra', '~> 1.4'
 end
 
 group :tools do
