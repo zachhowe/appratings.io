@@ -42,7 +42,7 @@ module AppRatings
       {:status => 'ok', :results => versions}.to_json
     end
 
-    get '/raw/:id' do
+    get '/ratings/daily/:id' do
       content_type :json
 
       app_id = params[:id]

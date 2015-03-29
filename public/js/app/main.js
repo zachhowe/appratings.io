@@ -82,7 +82,7 @@ define(function(require, exports) {
       callback = renderChart;
     }
 
-    $.get(sprintf('/api/raw/%s', app_id), function(read_data) {
+    $.get(sprintf('/api/ratings/daily/%s', app_id), function(read_data) {
       generateChart(read_data);
     });
   };
