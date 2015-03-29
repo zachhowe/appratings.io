@@ -2,12 +2,18 @@ requirejs.config({
   baseUrl: 'js/lib',
   paths: {
     app: '../app'
+  },
+  shim: {
+    "highcharts": {
+      "exports": "Highcharts",
+      "deps": [ "jquery"] 
+    },
   }
 });
 
 requirejs(
-  ['jquery', 'chart', 'sprintf', 'app/main'],
-  function ($, chart, sprintf, main) {
+  ['jquery', 'sprintf', 'highcharts', 'app/main'],
+  function ($, sprintf, highcharts, main) {
     $("#app_icon").hide();
 
     main.getAppList();
@@ -16,12 +22,6 @@ requirejs(
       var app_id = $('#app_id').val();
 
       main.loadApp(app_id);
-    });
-
-    $('#loadAllVersionsButton').click(function() {
-      var app_id = $('#app_id').val();
-
-      main.loadAppVersions(app_id);
     });
   }
 );
