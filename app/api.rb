@@ -46,7 +46,6 @@ module AppRatings
       content_type :json
 
       app_id = params[:id]
-      version = params[:v]
 
       app = AppHelper.find_app(app_id)
       raw = RatingHelper.read_ratings_raw(app_id)
@@ -63,7 +62,6 @@ module AppRatings
       content_type :json
 
       app_id = params[:id]
-      version = params[:v]
 
       app = AppHelper.find_app(app_id)
       records = RatingHelper.read_ratings(app_id)
