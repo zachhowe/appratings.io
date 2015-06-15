@@ -19,7 +19,7 @@ module AppRatings
         docs.each do |doc|
           app_id = doc['app_id']
           info = doc['info']
-          record_count = collection.count({'app_id' => app_id}) # self.number_of_records_for_app(app_id)
+          record_count = number_of_records_for_app(app_id)
 
           unless info.nil?
             app_name = info['trackName']
@@ -37,7 +37,7 @@ module AppRatings
     def self.number_of_records_for_app(app_id)
       number_of_records = 0
 
-      DataHelper.open('apps') do |collection|
+      DataHelper.open('ratings') do |collection|
         number_of_records = collection.count({'app_id' => app_id})
       end
 
