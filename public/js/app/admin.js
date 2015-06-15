@@ -17,7 +17,7 @@ define(function(require, exports) {
   };
 
   exports.getAppList = function() {
-    $.get('/list', function(resp) {
+    $.get('/api/list', function(resp) {
       var status = resp.status;
       if (status !== 'ok') {
         console.log('Error: ' + status);

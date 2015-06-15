@@ -19,7 +19,20 @@ module AppRatings
         apps << app
       end
 
-      {:status => 'ok', :results => apps}.to_json
+      app_list = apps.to_a.sort! do |a, b|
+        app1_record_count = b['number_of_records']
+        app2_record_count = a['number_of_records']
+
+        if app1_record_count.to_i > app2_record_count.to_i
+          return 1
+        elsif app1_record_count.to_i < app2_record_count.to_i
+          return -1
+        end
+
+        return 0
+      end
+
+      {:status => 'ok', :results => app_list}.to_json
     end
 
     get '/info/:id' do
