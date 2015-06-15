@@ -24,10 +24,9 @@ module AppRatings
         app2_record_count = a['number_of_records']
 
         if app1_record_count.to_i > app2_record_count.to_i
-            return 1
-          elsif app1_record_count.to_i < app2_record_count.to_i
-            return -1
-          end
+          return 1
+        elsif app1_record_count.to_i < app2_record_count.to_i
+          return -1
         end
 
         return 0
