@@ -21,7 +21,7 @@ module AppRatings
       firstDate = nil
 
       DataHelper.open('ratings') do |collection|
-          docs = collection.find({:app_id => app_id}, {:limit => limit, :sort => [:time, :desc]})
+        docs = collection.find({:app_id => app_id}, {:limit => limit, :sort => [:time, :desc]})
 
         items = docs.to_a.sort! do |a, b|
           compare_versions(b['version'], a['version'])
