@@ -39,3 +39,6 @@ DEPENDENCIES
   sinatra (~> 1.4)
   thin (~> 1.5)
   trollop (~> 2.0)
+
+BUNDLED WITH
+   1.10.3

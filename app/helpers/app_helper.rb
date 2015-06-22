@@ -21,7 +21,7 @@ module AppRatings
           info = doc['info']
           record_count = number_of_records_for_app(app_id)
 
-          unless info.nil?
+          unless info.nil? || record_count.eql?(0)
             app_name = info['trackName']
 
             unless app_name.nil?
@@ -34,11 +34,19 @@ module AppRatings
       end
     end
 
+    def self.sort_app_list_by_number_of_records(apps)
+      app_list = apps.to_a.sort! do |a, b|
+        a[:number_of_records] <=> b[:number_of_records]
+      end
+
+      app_list
+    end
+
     def self.number_of_records_for_app(app_id)
       number_of_records = 0
 
       DataHelper.open('ratings') do |collection|
-        number_of_records = collection.count({'app_id' => app_id})
+        number_of_records = collection.find({:app_id => app_id}).count
       end
 
       number_of_records
