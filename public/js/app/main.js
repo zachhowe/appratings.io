@@ -98,7 +98,7 @@ define(function(require, exports) {
 
     var records = results.records;
     renderChart(first, records);
-  }
+  };
 
   var chart = null;
 
